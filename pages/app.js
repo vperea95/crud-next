@@ -8,11 +8,11 @@ import ListProducts from "../components/ListProducts";
 
 function App() {
   return (
-    <Container className="p-3">
+    <Container>
       <Col>
           <AddProduct />
         </Col>
-        <Col className="col-8">
+        <Col>
           <FilterProducts />
           <hr />
           <ListProducts />

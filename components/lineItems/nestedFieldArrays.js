@@ -1,15 +1,13 @@
 import React from "react";
 import { useFieldArray } from "react-hook-form";
 
-let renderCount = 0;
 
 export default function Fields({ control, register, setValue, getValues }) {
   const { fields, append, remove, prepend } = useFieldArray({
     control,
     name: "test"
   });
-
-  renderCount++;
+  console.log(append)
   return (
     <>
       <ul>
@@ -38,12 +36,11 @@ export default function Fields({ control, register, setValue, getValues }) {
             append({ name: "append" });
           }}
         >
-          append
+          Agregar
         </button>
 
       </section>
 
-      <span className="counter">Render Count: {renderCount}</span>
     </>
   );
 }

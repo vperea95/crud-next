@@ -5,17 +5,13 @@ import { useSetRecoilState } from "recoil";
 import { v4 as uuid4 } from "uuid";
 import { products } from "../../store";
 import { useForm } from "react-hook-form";
+import Prueba from '../lineItems/prueba'
 
 
 const defaultValues = {
   test: [
     {
-      name: "useFieldArray1",
-      nestedArray: [{ field1: "field1", field2: "field2" }]
-    },
-    {
-      name: "useFieldArray2",
-      nestedArray: [{ field1: "field1", field2: "field2" }]
+      name: "useFiel"
     }
   ]
 };
@@ -67,15 +63,7 @@ const AddProduct = (props) => {
     setQuantity(0);
   };
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    getValues,
-    errors,
-    reset,
-    setValue
-  } = useForm({
+  const {register, control,  handleSubmit, getValues, errors, reset, setValue } = useForm({
     defaultValues
  });
 
@@ -129,12 +117,14 @@ const AddProduct = (props) => {
       </Form.Group>
       <Form.Group controlId="lineItems">
         <Form.Label>lineItems:</Form.Label>
-        <FieldArray
-        {...{ control, register, getValues, defaultValues, setValue, errors }}
-      />
+       
       </Form.Group>
            
       </Form>
+      {/* <FieldArray
+        {...{ control, register, getValues, defaultValues, setValue, errors }}
+      /> */}
+      <Prueba/>
       </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={() => handleClose()}>
