@@ -5,7 +5,11 @@ import { useSetRecoilState } from "recoil";
 import { v4 as uuid4 } from "uuid";
 import { products } from "../../store";
 import { useForm } from "react-hook-form";
+import Prueba from '../lineItems/prueba'
 import { v4 as uuidv4 } from 'uuid';
+import { useRecoilValue, useResetRecoilState } from "recoil";
+
+const productsState = useRecoilValue(filterProducts);
 
 const AddProduct = (props) => {
   const { show, id, handleClose } = props;
@@ -33,7 +37,7 @@ const AddProduct = (props) => {
   //   setLitem(e.target.value);
   // };
 
-  const addProduct = () => {
+  const addProduct = (productsState) => {
     setProducts((oldList) => [
       ...oldList,
       {
@@ -44,15 +48,15 @@ const AddProduct = (props) => {
         inputFields: inputFields,
       },
     ]);
-    const newLine = {id,name,color,size,inputFields}
+
     resetForm();
-    sendFormData(JSON.stringify(newLine)) 
+    sendFormData(productsState) 
     handleClose();
   };
 
 
-  const sendFormData = (newLine) => {
-    console.log(newLine,'this is the product state from send form data')
+  const sendFormData = (productsState) => {
+    console.log(productsState,'this is the product state from send form data')
     var xhr = new XMLHttpRequest();
 
     xhr.open("POST", "https://hookb.in/eKzNonlkKgHlwQmmwnol", true);
@@ -65,7 +69,7 @@ const AddProduct = (props) => {
         }
     };
     
-    var data = JSON.stringify(newLine);
+    var data = JSON.stringify(productsState);
     
     xhr.send(data);
     

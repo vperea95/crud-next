@@ -5,7 +5,11 @@ import { useSetRecoilState } from "recoil";
 import { v4 as uuid4 } from "uuid";
 import { products } from "../../store";
 import { useForm } from "react-hook-form";
+import Prueba from '../lineItems/prueba'
 import { v4 as uuidv4 } from 'uuid';
+import { useRecoilValue, useResetRecoilState } from "recoil";
+
+const productsState = useRecoilValue(filterProducts);
 
 const AddProduct = (props) => {
   const { show, id, handleClose } = props;

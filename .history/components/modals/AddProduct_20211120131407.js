@@ -5,7 +5,9 @@ import { useSetRecoilState } from "recoil";
 import { v4 as uuid4 } from "uuid";
 import { products } from "../../store";
 import { useForm } from "react-hook-form";
+import Prueba from '../lineItems/prueba'
 import { v4 as uuidv4 } from 'uuid';
+
 
 const AddProduct = (props) => {
   const { show, id, handleClose } = props;
@@ -15,7 +17,6 @@ const AddProduct = (props) => {
   // const [lItem, setLitem] = useState([]);
 
   const setProducts = useSetRecoilState(products);
-  console.log(products)
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -44,34 +45,9 @@ const AddProduct = (props) => {
         inputFields: inputFields,
       },
     ]);
-    const newLine = {id,name,color,size,inputFields}
     resetForm();
-    sendFormData(JSON.stringify(newLine)) 
     handleClose();
   };
-
-
-  const sendFormData = (newLine) => {
-    console.log(newLine,'this is the product state from send form data')
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", "https://hookb.in/eKzNonlkKgHlwQmmwnol", true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("done.");
-        }
-    };
-    
-    var data = JSON.stringify(newLine);
-    
-    xhr.send(data);
-    
-  };
-
-
 
   const resetForm = () => {
     setName("");
@@ -79,12 +55,10 @@ const AddProduct = (props) => {
     setSize(0.0);
   };
 
-  let priceInputName
-  let quantityInputName
 
   //---------------------------------------------- input dinamicos----------------------------------------------
   const [inputFields, setInputFields] = useState([
-    { id: uuidv4(), priceInputName: 0, quantityInputName: 0, totalPrice: (priceInputName * quantityInputName) },
+    { id: uuidv4(), price: '', quantity: '', totalPrice: price * quantity },
   ]);
   console.log(inputFields, 'whats coming out of this variable - lets check')
 
@@ -96,24 +70,20 @@ const AddProduct = (props) => {
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map(i => {
       if (id === i.id) {
+        event.target.value
         i[event.target.name] = event.target.value
       }
       return i;
     })
 
     setInputFields(newInputFields);
-
-    const newArr1 = inputFields.map(v => ({...v, totalPrice: v.priceInputName * v.quantityInputName}))
-    console.log(newArr1)
-    setInputFields(newArr1)
   }
-
   
   const handleAddFields = (e) => {
     e.preventDefault();
     console.log(e)
 
-    setInputFields([...inputFields, { id: uuidv4(), price: 0, quantity: 0, totalPrice: 0 }])
+    setInputFields([...inputFields, { id: uuidv4(), price: 0, quantity: 0, totalprice: 0 }])
   }
 
   const handleRemoveFields = id => {
@@ -122,8 +92,6 @@ const AddProduct = (props) => {
     setInputFields(values);
   }
  
-
-
 
   return (
     <>
@@ -163,6 +131,16 @@ const AddProduct = (props) => {
                 onChange={(e) => onChangeSize(e)}
               />
             </Form.Group>
+
+            <Form.Group controlId="quantity">
+              <Form.Label>Quantity:</Form.Label>
+              <Form.Control
+                type="number"
+                value={quantity}
+                placeholder="Enter the Product Quantity"
+                onChange={(e) => onChangeQuantity(e)}
+              />
+            </Form.Group>
             <Form.Group controlId="lineItems">
               <Form.Label>lineItems:</Form.Label>
               {inputFields.map(inputField => (
@@ -174,7 +152,7 @@ const AddProduct = (props) => {
                     placeholder="price"
                     variant="filled"
                     type="number"
-                    value={inputField.priceInputName}
+                    value={inputField.price}
                     // onChange={(e) => onChangeLitem(e)}
                     onChange={event => handleChangeInput(inputField.id, event)}
                   />
@@ -189,7 +167,7 @@ const AddProduct = (props) => {
                     // onChange={(e) => onChangeLitem(e)}
                     onChange={event => handleChangeInput(inputField.id, event)}
                   />
-                  <span>Total:{inputField.totalPrice}</span>
+                  <span>Total:</span>
                   <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                     -
                   </button>

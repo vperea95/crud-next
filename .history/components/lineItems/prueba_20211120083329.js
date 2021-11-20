@@ -29,7 +29,7 @@ function Prueba() {
   ]);
   
   const data = inputFields
-  console.log(data, 'soy la data');
+  console.log(data);
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);

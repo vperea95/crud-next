@@ -9,27 +9,25 @@ import Icon from '@material-ui/core/Icon';
 import { v4 as uuidv4 } from 'uuid';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-    },
-  },
-  button: {
-    margin: theme.spacing(1),
-  }
-}))
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     '& .MuiTextField-root': {
+//       margin: theme.spacing(1),
+//     },
+//   },
+//   button: {
+//     margin: theme.spacing(1),
+//   }
+// }))
 
 function Prueba() {
   const classes = useStyles()
 
-  
-  const[inputFields, setInputFields] = useState([
+  const [inputFields, setInputFields] = useState([
     { id: uuidv4(), firstName: ''},
   ]);
-  
-  const data = inputFields
-  console.log(data, 'soy la data');
+  console.log("InputFields", inputFields);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);

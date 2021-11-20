@@ -23,13 +23,11 @@ const useStyles = makeStyles((theme) => ({
 function Prueba() {
   const classes = useStyles()
 
-  
-  const[inputFields, setInputFields] = useState([
+  const [inputFields, setInputFields] = useState([
     { id: uuidv4(), firstName: ''},
   ]);
-  
-  const data = inputFields
-  console.log(data, 'soy la data');
+  console.log("InputFields", inputFields);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("InputFields", inputFields);

@@ -51,6 +51,7 @@ const ListProducts = () => {
             <th>Color</th>
             <th>Size</th>
             <th>Quantity</th>
+            <th>Item</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -68,6 +69,7 @@ const ListProducts = () => {
                 <td>{item.color}</td>
                 <td>{item.size}</td>
                 <td>{item.quantity}</td>
+                <td>{item.Item}</td>
                 <td colSpan="2">
                   <Button
                     variant="secondary"
