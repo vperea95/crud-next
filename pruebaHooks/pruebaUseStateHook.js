@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 const Efecto = () => {
   const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    document.title = `Hiciste clic ${count} veces`;
+  },[count]);
 
   return (
     <div>

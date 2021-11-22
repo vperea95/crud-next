@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import FieldArray from "../lineItems/nestedFieldArrays";
 import { useSetRecoilState } from "recoil";
@@ -121,8 +121,14 @@ const AddProduct = (props) => {
     values.splice(values.findIndex(value => value.id === id), 1);
     setInputFields(values);
   }
- 
 
+  //----------------------useRef-----------------------
+
+  const inputEl = useRef(null);
+  const onButtonClick = (e) => {
+    e.preventDefault();
+    inputEl.current.focus();
+  };
 
 
   return (
@@ -143,6 +149,16 @@ const AddProduct = (props) => {
                 onChange={(e) => onChangeName(e)}
               />
             </Form.Group>
+            <Form.Group >
+              <Form.Label>Name:</Form.Label>
+              <Form.Control
+                type="text"
+                ref={inputEl}
+                placeholder="useRef"
+                onChange={(e) => onChangeName(e)}
+              />
+            </Form.Group>
+            <button onClick={onButtonClick}>use Ref</button>
 
             <Form.Group controlId="color">
               <Form.Label>Color:</Form.Label>
